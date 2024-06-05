@@ -32,9 +32,7 @@ Things you may want to cover:
 |first_name_kanji   |string         |null:false|
 |family_name_kana   |string         |null:false|
 |first_name_kana    |string         |null:false|
-|birth_year         |integer        |null:false|
-|birth_month        |integer        |null:false|
-|birth_day          |integer        |null:false|
+|birthday           |date           |null:false|
 ### Asosiataion
 - has_many　:items
 - has_many　:purchases
