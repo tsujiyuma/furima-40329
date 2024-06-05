@@ -25,9 +25,9 @@ Things you may want to cover:
 
 # users_table
 |Column             |Type           |Options|
-|nickname           |string         |null: false, unique: true|
-|mail               |string         |null: false, unique: true|
-|password           |string         |null:false|
+|nickname           |string         |null:false|
+|email              |string         |null: false, unique: true|
+|encrypted_password |string         |null:false|
 |family_name_kanji  |string         |null:false|
 |first_name_kanji   |string         |null:false|
 |family_name_kana   |string         |null:false|
