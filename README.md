@@ -40,15 +40,15 @@ Things you may want to cover:
 
 # items_table
 |Column             |Type           |Options|
-|user_id            |references     |null:false, foreign_key:true|
+|user               |references     |null:false, foreign_key:true|
 |name               |string         |null:false|
 |description        |text           |null:false|
-|category           |string         |null:false|
-|status             |string         |null:false|
-|shipping_fee       |string         |null:false|
-|shippng_days       |string         |null:false|
+|category_id        |interger       |null:false|
+|status_id          |interger       |null:false|
+|shipping_fee_id    |interger       |null:false|
+|region_id          |interger       |null:false|
+|shippng_day_id     |interger       |null:false|
 |price              |integer        |null:false|
-|image              |string         |null:false|
 ### Asosiation
 - belongs_to　:user
 - has_one :order
