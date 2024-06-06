@@ -35,7 +35,7 @@ Things you may want to cover:
 |birthday           |date           |null:false|
 ### Asosiataion
 - has_many　:items
-- has_many　:purchases
+- has_one   :order
 
 
 # items_table
@@ -59,6 +59,7 @@ Things you may want to cover:
 |item_id            |references     |null:false, foreign_key:true|
 |item_available     |boolean        |null:false|
 ### Asosiation
+- belongs_to :user
 - belongs_to :item
 - has_one :purchase
 
@@ -73,5 +74,4 @@ Things you may want to cover:
 |building_name      |string         |null:false|
 |photo_num          |integer        |null:false|
 ### Asosiation
-- belongs_to :user
 - belongs_to :order
