@@ -46,7 +46,7 @@ Things you may want to cover:
 |category_id        |integer       |null:false|
 |status_id          |integer       |null:false|
 |shipping_fee_id    |integer       |null:false|
-|prefecuture_id     |integer       |null:false|
+|prefecture_id     |integer       |null:false|
 |shippng_day_id     |integer       |null:false|
 |price              |integer        |null:false|
 ### Asosiation
