@@ -3,9 +3,9 @@ class Item < ApplicationRecord
   belongs_to :user
   belongs_to :category
   belongs_to :status
-  belongs_to :shippingfee
+  belongs_to :shipping_fee
   belongs_to :prefecture
-  belongs_to :shippingday
+  belongs_to :shipping_day
   has_one_attached :image
 
   validates :name, :description, :price, :image, presence: true
