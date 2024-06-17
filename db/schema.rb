@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_15_020403) do
   end
 
   create_table "items", charset: "utf8", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.string "name", null: false
     t.text "description", null: false
     t.integer "category_id", null: false
