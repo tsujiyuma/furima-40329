@@ -1,4 +1,4 @@
-window.addEventListener('load', () => {
+window.addEventListener('turbo:load', () => {
   const priceInput = document.querySelector("#item-price");
   const addTaxDom = document.querySelector("#add-tax-price");
   const profitPrice = document.querySelector("#profit");
