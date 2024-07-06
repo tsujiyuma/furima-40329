@@ -1,9 +1,9 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: [:index]
+  before_action :purchase_find, only: [:index, :create]
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    @item = Item.find(params[:item_id])
     @order_purchase = OrderPurchase.new
     return unless @item.user == current_user || Order.exists?(item_id: @item.id)
 
@@ -11,7 +11,6 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_purchase = OrderPurchase.new(order_purchase_params)
     if @order_purchase.valid?
       Payjp.api_key = ENV['PAYJP_SECRET_KEY'] # 秘密鍵
@@ -29,6 +28,10 @@ class PurchasesController < ApplicationController
   end
 
   private
+
+  def purchase_find
+    @item = Item.find(params[:item_id])
+  end
 
   def order_purchase_params
     params.require(:order_purchase).permit(:post_code, :municipality, :prefecture_id, :street_addres, :building_name, :photo_num).merge(

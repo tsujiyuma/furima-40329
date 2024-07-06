@@ -3,6 +3,8 @@ class OrderPurchase
   attr_accessor :post_code, :prefecture_id, :municipality, :street_addres, :building_name, :photo_num, :item_id, :user_id, :token
 
   with_options presence: true do
+    validates :user_id
+    validates :item_id
     validates :token
     validates :post_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'はハイフンを含む7桁の数字で入力してください' }
     validates :municipality

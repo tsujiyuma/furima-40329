@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe OrderPurchase, type: :model do
   before do
-    @order_purchase = OrderPurchase.new(user_id: 1, item_id: 1, token: 'tok_visa')
-    @purchase = FactoryBot.build(:order_purchase)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item, user: @user)
+    @user2 = FactoryBot.create(:user)
+    @purchase = FactoryBot.build(:order_purchase, user_id: @user2.id, item_id: @item.id)
   end
 
   describe '購入処理' do
@@ -15,9 +17,9 @@ RSpec.describe OrderPurchase, type: :model do
 
     context '購入処理がうまくいかない時' do
       it 'カード情報に不備がある' do
-        @order_purchase.token = ''
-        @order_purchase.valid?
-        expect(@order_purchase.errors.full_messages).to include("Token can't be blank")
+        @purchase.token = ''
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("Token can't be blank")
       end
 
       it '郵便番号が空欄でないこと' do
@@ -62,16 +64,34 @@ RSpec.describe OrderPurchase, type: :model do
         expect(@purchase.errors.full_messages).to include('Photo num は半角数字で入力してください')
       end
 
-      it '電話番号の桁数が少ない' do
-        @purchase.photo_num = 0o012000000
+      it '電話番号の9桁以下は保存できないこと' do
+        @purchase.photo_num = 12_345_678
         @purchase.valid?
         expect(@purchase.errors.full_messages).to include('Photo num is too short (minimum is 10 characters)')
+      end
+
+      it '電話番号の12桁以上は保存できないこと' do
+        @purchase.photo_num = 1_234_567_890_123
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include('Photo num is too long (maximum is 11 characters)')
       end
 
       it '電話番号が数字以外が入力されている' do
         @purchase.photo_num = 'a123456789'
         @purchase.valid?
         expect(@purchase.errors.full_messages).to include('Photo num is not a number')
+      end
+
+      it 'user_idが空だと登録できない' do
+        @purchase.user_id = ''
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが空だと登録できない' do
+        @purchase.item_id = ''
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
