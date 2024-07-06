@@ -13,6 +13,11 @@ RSpec.describe OrderPurchase, type: :model do
       it '購入処理がうまくいく時' do
         expect(@purchase).to(be_valid)
       end
+
+      it '建物名が空でもうまくいくこと' do
+        @purchase.building_name = ""
+        expect(@purchase).to(be_valid)
+      end
     end
 
     context '購入処理がうまくいかない時' do
